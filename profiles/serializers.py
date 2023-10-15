@@ -9,6 +9,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(source="user.first_name")
     last_name = serializers.CharField(source="user.last_name")
     email = serializers.EmailField(source="user.email")
+    is_artist = serializers.BooleanField(source="user.is_artist")
     full_name = serializers.SerializerMethodField(read_only=True)
     country = CountryField(name_only=True)
     
@@ -20,6 +21,7 @@ class ArtistSerializer(serializers.ModelSerializer):
             "last_name",
             "full_name",
             "stage_name",
+            "is_artist",
             "email",
             "id",
             "phone_number",
