@@ -4,7 +4,7 @@ from rest_framework.exceptions import APIException
 
 class ArtistNotFound(APIException):
     status_code = 404
-    default_detail = "the requested Artist does not exist"
+    default_detail = "The requested Artist does not exist"
     
     
 class NotYourProfile(APIException):
