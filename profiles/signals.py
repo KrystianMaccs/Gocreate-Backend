@@ -13,9 +13,10 @@ logger = logging.getLogger(__name__)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Artist.objects.create(user=instance)
+        logger.info(f"{instance}'s profile created")
         
 
-@receiver(post_save, sender=AUTH_USER_MODEL)
-def save_user_profile(sender, instance, **kwargs):
-    instance.artist.save()
-    logger.info(f"{instance}'s profile created")
+# @receiver(post_save, sender=AUTH_USER_MODEL)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.artist.save()
+#     logger.info(f"{instance}'s profile created")

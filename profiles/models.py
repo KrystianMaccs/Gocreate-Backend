@@ -1,12 +1,14 @@
-from django.contrib.auth import get_user_model
+#from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
+from gocreate.settings.base import AUTH_USER_MODEL
 
 from common.models import TimeStampedUUIDModel
 
-User = get_user_model()
+# User = get_user_model()
+User = AUTH_USER_MODEL
 
 
 class Gender(models.TextChoices):
