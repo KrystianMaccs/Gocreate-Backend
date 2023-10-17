@@ -9,14 +9,21 @@ from gocreate.settings.base import AUTH_USER_MODEL
 
 logger = logging.getLogger(__name__)
 
+
+
 @receiver(post_save, sender=AUTH_USER_MODEL)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
+def create_artist_profile(sender, instance, created, **kwargs):
+    if created and instance.is_artist:
         Artist.objects.create(user=instance)
         logger.info(f"{instance}'s profile created")
-        
+        print("Artist has been created")
 
 # @receiver(post_save, sender=AUTH_USER_MODEL)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.artist.save()
-#     logger.info(f"{instance}'s profile created")
+# def create_artist_profile(sender, instance, created, **kwargs):
+#     if created and instance.is_artist and not instance.is_superuser:
+#         Artist.objects.create(user=instance)
+#         logger.info(f"{instance}'s profile created")
+#         print("Artist has been created")
+
+
+        

@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+#from profiles.models import Artist
 
 from .managers import CustomUserManager
 
@@ -38,3 +39,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.username
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # if self.is_artist:
+        #     Artist.objects.get_or_create(user=self)
