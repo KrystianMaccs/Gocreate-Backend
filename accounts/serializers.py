@@ -8,8 +8,6 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    gender = serializers.CharField(source="artist.gender")
-    phone_number = PhoneNumberField(source="artist.phone_number")
     country = CountryField(source="artist.country")
     city = serializers.CharField(source="artist.city")
     first_name = serializers.SerializerMethodField()

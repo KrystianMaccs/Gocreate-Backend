@@ -4,9 +4,9 @@ from .models import Artist
 
 
 class ArtistAdmin(admin.ModelAdmin):
-    list_display = ["id", "pkid", "user", "gender", "phone_number", "city"]
+    list_display = ["id", "pkid", "user", "city"]
     
-    list_filter = ["gender", "country", "city"]
+    list_filter = ["country", "city"]
     
     list_display_links = ["id", "pkid", "user"]
     

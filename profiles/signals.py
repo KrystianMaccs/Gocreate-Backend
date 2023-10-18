@@ -1,22 +1,22 @@
 import logging
 
-from django.db.models.signals import post_save
+from django.db import transaction
 from django.dispatch import receiver
 
 from profiles.models import Artist
-from gocreate.settings.base import AUTH_USER_MODEL
 
-
+from djoser.signals import user_registered
 logger = logging.getLogger(__name__)
 
 
 
-@receiver(post_save, sender=AUTH_USER_MODEL)
-def create_artist_profile(sender, instance, created, **kwargs):
-    if created and instance.is_artist:
-        Artist.objects.create(user=instance)
-        logger.info(f"{instance}'s profile created")
-        print("Artist has been created")
-
-
-        
+@transaction.atomic
+@receiver(user_registered)
+def my_handler(user, request, **kwargs):
+    if user.is_artist:
+        logger.info(f"{user} is an artist!")
+        artist = Artist.objects.create(user=user)
+        logger.info(f"{artist} has been created")
+    else:
+        logger.info(f"{user} is not an artist")
+    

@@ -4,11 +4,19 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-#from profiles.models import Artist
+# from phonenumber_field.modelfields import PhoneNumberField
 
 from .managers import CustomUserManager
 
 
+
+
+class Gender(models.TextChoices):
+    MALE = "Male", _("Male")
+    FEMALE = "Female", _("Female")
+    OTHER = "Other", _("Other")
+    
+    
 class User(AbstractBaseUser, PermissionsMixin):
     pkid = models.BigAutoField(primary_key=True, editable=False)
     id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -16,6 +24,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(verbose_name=_("First Name"), max_length=50)
     last_name = models.CharField(verbose_name=_("Last Name"), max_length=50)
     email = models.EmailField(verbose_name=_("Email Address"), unique=True)
+    gender = models.CharField(verbose_name=_("Gender"), choices=Gender.choices, default=Gender.OTHER, max_length=20)
+    # phone_number = PhoneNumberField(verbose_name=_("Phone Number"), default="+2348037286666", max_length=30, unique=True)
     is_artist = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -39,8 +49,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.username
-    
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     # if self.is_artist:
-    #         Artist.objects.get_or_create(user=self)

@@ -20,13 +20,10 @@ class ArtistSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "full_name",
-            "stage_name",
             "is_artist",
             "email",
             "id",
-            "phone_number",
             "bio",
-            "gender",
             "country",
             "country_code",
             "city",
@@ -53,9 +50,7 @@ class UpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = [
-            "phone_number",
             "bio",
-            "gender",
             "country",
             "city",
             "music_class",
