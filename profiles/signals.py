@@ -18,12 +18,5 @@ def create_artist_profile(sender, instance, created, **kwargs):
         logger.info(f"{instance}'s profile created")
         print("Artist has been created")
 
-# @receiver(post_save, sender=AUTH_USER_MODEL)
-# def create_artist_profile(sender, instance, created, **kwargs):
-#     if created and instance.is_artist and not instance.is_superuser:
-#         Artist.objects.create(user=instance)
-#         logger.info(f"{instance}'s profile created")
-#         print("Artist has been created")
-
 
         

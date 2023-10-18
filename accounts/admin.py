@@ -28,9 +28,9 @@ class UserAdmin(BaseUserAdmin):
         "username",
         "first_name",
         "last_name",
-        "is_artist",
         "is_staff",
         "is_active",
+        "is_artist",
     ]
     fieldsets = (
         (
@@ -38,7 +38,7 @@ class UserAdmin(BaseUserAdmin):
             {
                 "fields": (
                     "email",
-                    "password",
+                    "password"
                 )
             },
         ),
@@ -57,6 +57,7 @@ class UserAdmin(BaseUserAdmin):
             {
                 "fields": (
                     "is_active",
+                    "is_artist",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -71,11 +72,11 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "password1", "password2", "is_staff", "is_active"),
+                "fields": ("email", "password1", "password2", "is_staff", "is_active", "is_artist"),
             },
         ),
     )
-    search_fields = ["email", "username", "first_name", "last_name"]
+    search_fields = ["email", "username", "first_name", "last_name", "is_artist"]
 
 
 admin.site.register(User, UserAdmin)

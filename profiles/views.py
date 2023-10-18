@@ -3,11 +3,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
+from .permissions import IsArtistPermission
 from .models import Artist
 from .serializers import ArtistSerializer
 
 class ArtistUpdateView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsArtistPermission]
 
     def get(self, request, format=None):
         user = self.request.user

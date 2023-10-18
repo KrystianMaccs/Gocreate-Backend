@@ -22,7 +22,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "first_name", "last_name"]
+    REQUIRED_FIELDS = ["username", "first_name", "last_name", "is_artist"]
 
     objects = CustomUserManager()
 
@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.username
     
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        # if self.is_artist:
-        #     Artist.objects.get_or_create(user=self)
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     # if self.is_artist:
+    #         Artist.objects.get_or_create(user=self)
